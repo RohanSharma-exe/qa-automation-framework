@@ -6,11 +6,10 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "allure-pytest>=2.16.0",
-    "faker>=40.32.0",
+    "loguru>=0.7.3",
     "pytest>=9.1.1",
-    "pytest-html>=4.2.0",
-    "pytest-xdist>=3.8.0",
     "python-dotenv>=1.2.2",
+    "ruff>=0.15.22",
     "selenium>=4.46.0",
     "webdriver-manager>=4.1.2",
 ]
