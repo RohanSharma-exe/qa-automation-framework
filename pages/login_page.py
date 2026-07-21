@@ -5,7 +5,6 @@ from config.settings import BASE_URL
 
 
 class LoginPage(BasePage):
-
     USERNAME = (By.ID, "user-name")
     PASSWORD = (By.ID, "password")
     LOGIN = (By.ID, "login-button")

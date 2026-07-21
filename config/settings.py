@@ -1,7 +1,11 @@
+from pathlib import Path
+
 BASE_URL = "https://www.saucedemo.com/"
 
-BROWSER = "chrome"
+TIMEOUT = 10
 
 HEADLESS = False
 
-TIMEOUT = 10
+ROOT = Path(__file__).resolve().parent.parent
+SCREENSHOT_DIR = ROOT / "screenshots"
+LOG_DIR = ROOT / "logs"

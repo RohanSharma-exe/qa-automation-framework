@@ -1,27 +1,27 @@
+import pytest
+
 from pages.login_page import LoginPage
 
 
-def test_valid_login(driver):
+@pytest.mark.parametrize(
+    "username,password,success",
+    [
+        ("standard_user", "secret_sauce", True),
+        ("locked_out_user", "secret_sauce", False),
+        ("", "secret_sauce", False),
+        ("standard_user", "", False),
+        ("", "", False),
+        ("wrong", "wrong", False),
+    ],
+)
+def test_login(driver, username, password, success):
     page = LoginPage(driver)
 
     page.open()
 
-    page.login(
-        "standard_user",
-        "secret_sauce",
-    )
+    page.login(username, password)
 
-    assert "inventory" in driver.current_url
-
-
-def test_invalid_login(driver):
-    page = LoginPage(driver)
-
-    page.open()
-
-    page.login(
-        "locked_out_user",
-        "wrong_password",
-    )
-
-    assert "Username and password do not match" in page.error_message()
+    if success:
+        assert "inventory" in driver.current_url
+    else:
+        assert "inventory" not in driver.current_url
