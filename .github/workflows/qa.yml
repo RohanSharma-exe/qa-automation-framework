@@ -9,18 +9,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - uses: astral-sh/setup-uv@v5
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
 
-      - run: uv python install 3.13
+      - name: Install Python
+        run: uv python install 3.13
 
-      # Add Chrome dependencies installation
-      - name: Install Chrome dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser chromium-chromedriver
+      - name: Install Google Chrome
+        uses: browser-actions/setup-chrome@v2
 
-      - run: uv sync
+      - name: Verify Chrome Installation
+        run: google-chrome --version
 
-      - run: uv run pytest
+      - name: Install Dependencies
+        run: uv sync
+
+      - name: Run Tests
+        env:
+          HEADLESS: "True"
+        run: uv run pytest -v
